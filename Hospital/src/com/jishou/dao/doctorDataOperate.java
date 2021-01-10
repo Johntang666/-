@@ -19,7 +19,7 @@ public class doctorDataOperate {
 	//定义男医生的名
     private static String boy="伟刚勇毅俊峰强军平保东文辉力明永健世广志义兴良海山仁波宁贵福生龙元全国胜学祥才发武新利清飞彬富顺信子杰涛昌成康星光天达安岩中茂进林有坚和彪博诚先敬震振壮会思群豪心邦承乐绍功松善厚庆磊民友裕河哲江超浩亮政谦亨奇固之轮翰朗伯宏言若鸣朋斌梁栋维启克伦翔旭鹏泽晨辰士以建家致树炎德行时泰盛雄琛钧冠策腾楠榕风航弘";
     public static int getNum(int start,int end) {//随机返回返回指定范围间的整数
-    	//Math.random()随机返回0.0至1.0之间的数
+    	//Math.random()随机返回0.0至1.0之间的数  (int)(Math.random()*(end-start+1)+start)
         return (int)(Math.random()*(end-start+1)+start);
     }
     private static String project[]= {"急诊内科","急诊外科","心内科","呼吸科","神经内科","内分泌科","肿瘤科","肾内科","皮肤科"};
@@ -124,7 +124,7 @@ public class doctorDataOperate {
     public static void addDoctor() {//增加医生数据
     	DatabaseConnectionSql dbcs=new DatabaseConnectionSql();//使用1中定义的连接数据库的类
     	String sql="insert into doctor(id,username,section,hospital,expert) values(?,?,?,?,?)";//使用占位符定义插入语句
-    	try(Connection conn=dbcs.getConnection();//获取数据库接
+    	try(Connection conn=dbcs.getConnection();//获取数据库连接
     		PreparedStatement pstmt=conn.prepareStatement(sql);){//实例化PreparedStatement
         	ArrayList<String> alist=new ArrayList<String>();//定义集合
     		for(int i=1;i<=10000;) {
@@ -155,7 +155,7 @@ public class doctorDataOperate {
 	    String sql="select id,username,expert from doctor";
 	    Vector<Vector> rows=new Vector<Vector>();//定义要返回的所有记录集合
     	DatabaseConnectionSql dbcs=new DatabaseConnectionSql();//使用1中定义的连接数据库的类
-    	try(Connection conn=dbcs.getConnection();//获取数据库接
+    	try(Connection conn=dbcs.getConnection();//获取数据库连接
     		PreparedStatement pstmt=conn.prepareStatement(sql);){//实例化PreparedStatement
     		ResultSet rs=pstmt.executeQuery();//执行查询语句，结果放到数据集中
     		while(rs.next()) {//遍历数据集
